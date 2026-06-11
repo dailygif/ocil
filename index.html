@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kisah Sempurna Kita</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. CORE CONFIGURATION (ANTI-SCROLL & ELASTIS)
+           ========================================================================== */
+        * {
+            box-sizing: border-box !important;
+            margin: 0; padding: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-user-select: none; user-select: none;
+        }
+
+        body, html {
+            background-color: #160211;
+            overflow: hidden;
+            height: 100vh; width: 100vw;
+        }
+
+        /* Wrapper Utama yang Menjamin Cocok di Blog & GitHub Pages */
+        .main-romantic-wrapper {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #2b0822 0%, #160211 100%);
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* LAYER HALAMAN */
+        .romance-page-layer {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 40px 20px;
+            visibility: hidden; z-index: 10; opacity: 0;
+            transform: scale(0.96);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+
+        .romance-page-layer.halaman-aktif {
+            visibility: visible; z-index: 50; opacity: 1; transform: scale(1);
+        }
+
+        /* ==========================================================================
+           2. ANIMASI HUJAN LOVE (SUPER LAMBAT & ELASTIS)
+           ========================================================================== */
+        .love-rain-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: 5; pointer-events: none;
+        }
+        .blur-love-item {
+            position: absolute; opacity: 0; bottom: -60px;
+            animation: riseUp 18s linear infinite; /* Sangat diperlambat ke 18 detik */
+            filter: blur(2px); color: #ff85a1;
+        }
+        @keyframes riseUp {
+            0% { transform: translateY(0) scale(0.7) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.4; }
+            85% { opacity: 0.3; }
+            100% { transform: translateY(-115vh) scale(1.1) rotate(360deg); opacity: 0; }
+        }
+
+        /* ==========================================================================
+           3. NAVIGASI TOMBOL (LONGGAR / TIDAK BERHIMPITAN)
+           ========================================================================== */
+        .nav-buttons-spacer { 
+            display: flex; gap: 65px; /* Jarak renggang antar tombol */
+            margin-top: 55px; /* Jarak longgar dari konten atas */
+            z-index: 100; width: 100%; justify-content: center;
+        }
+        .btn-romance-nav { 
+            padding: 12px 35px; font-size: 13px; font-weight: 500; 
+            background: rgba(255,255,255,0.06); color: #fff; 
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 25px; 
+            cursor: pointer; transition: 0.3s; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .btn-romance-nav:hover { background: #ff85a1; color: #160211; border-color: #ff85a1; }
+
+        /* ==========================================================================
+           4. VISUAL ELEMEN PER HALAMAN
+           ========================================================================== */
+        
+        /* HALAMAN 1: EMOT FLOWER & FOTO GLOW */
+        .flower-glow-header {
+            position: relative; font-size: 55px; margin-bottom: 60px; /* Jarak jauh */
+            z-index: 20; display: flex; justify-content: center; align-items: center;
+        }
+        .couple-images-row {
+            position: relative; display: flex; justify-content: center; align-items: center; gap: 30px;
+            width: 100%; max-width: 380px; z-index: 20; margin-bottom: 50px;
+        }
+        .lamp-glow-effect {
+            position: absolute; width: 155px; height: 155px;
+            background: radial-gradient(circle, rgba(255, 133, 161, 0.45) 0%, transparent 75%);
+            border-radius: 50%; filter: blur(25px); z-index: -1;
+        }
+        .photo-elastic-item {
+            flex: 1; max-width: 145px; max-height: 195px; width: auto; height: auto;
+            object-fit: contain; border-radius: 14px; border: 2.5px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6); position: relative;
+        }
+        .photo-elastic-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+        .btn-main-open {
+            padding: 15px 65px; font-size: 14px; font-weight: 600; color: #160211;
+            background: #ff85a1; border: none; border-radius: 25px; cursor: pointer;
+            box-shadow: 0 6px 25px rgba(255, 133, 161, 0.4); transition: 0.3s; z-index: 25;
+        }
+
+        /* HALAMAN 2: APPLE MUSIC CARD */
+        .apple-music-mini-card { 
+            background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px); padding: 20px; border-radius: 24px; 
+            width: 100%; max-width: 260px; border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.45); text-align: left;
+        }
+        .apple-cover-art { width: 100%; aspect-ratio: 1; border-radius: 14px; margin-bottom: 15px; overflow: hidden; }
+        .apple-cover-art img { width: 100%; height: 100%; object-fit: cover; }
+        .apple-track-name { font-size: 16px; font-weight: 600; color: #fff; }
+        .apple-track-artist { font-size: 13px; color: #ff85a1; margin-top: 2px; }
+        .apple-progress-timeline { width: 100%; height: 4px; background: rgba(255,255,255,0.12); border-radius: 2px; margin-top: 15px; cursor: pointer; }
+        .apple-progress-bar-fill { width: 0%; height: 100%; background: #fff; border-radius: 2px; }
+        .apple-timestamps { display: flex; justify-content: space-between; font-size: 10px; color: #888; margin-top: 6px; margin-bottom: 15px; }
+        .apple-controls-layout { display: flex; justify-content: space-around; align-items: center; }
+        .apple-icon-btn { background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; }
+        .apple-icon-btn.master-play-pause { font-size: 32px; color: #ff85a1; }
+
+        /* HALAMAN 3: KERTAS SURAT RAPI (FOKUS DI TENGAH) */
+        .romantic-letter-paper { 
+            background: #faf3e0; color: #3d2a16; padding: 35px 25px; border-radius: 16px; 
+            width: 100%; max-width: 320px; max-height: 52vh; border-left: 6px solid #dcd1b4; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); overflow-y: auto; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .romantic-letter-paper h2 { font-family: 'Great Vibes', cursive; font-size: 32px; margin-bottom: 15px; color: #52391e; }
+        .romantic-letter-paper p { font-size: 14px; line-height: 1.6; color: #3d2a16; word-wrap: break-word; font-weight: 400; }
+
+        /* HALAMAN 4: GALERI FOTO ELASTIS PORTRAIT & LANDSCAPE */
+        .gallery-elastic-container {
+            display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 340px;
+        }
+        .frame-portrait-elastic { width: 140px; height: 190px; object-fit: cover; border-radius: 12px; border: 2px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+        .frame-landscape-elastic { width: 260px; height: 160px; object-fit: cover; border-radius: 12px; border: 2px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+
+        /* HALAMAN 5: WHATSAPP REAL INTERACTIVE CHAT BOX */
+        .unlocked-chat-container { 
+            width: 100%; max-width: 330px; background: #0b141a; border: 1px solid rgba(255,133,161,0.2); 
+            border-radius: 24px; display: flex; flex-direction: column; height: 52vh; box-shadow: 0 15px 40px rgba(0,0,0,0.6); overflow: hidden;
+        }
+        .chat-messages-log { 
+            flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background-color: #0b141a;
+        }
+        .chat-bubble-row { 
+            position: relative; max-width: 85%; padding: 8px 14px 18px 14px; font-size: 13.5px; line-height: 1.4; border-radius: 14px; color: #fff; word-wrap: break-word; 
+            animation: popBubble 0.2s ease-out forwards; display: flex; flex-direction: column;
+        }
+        @keyframes popBubble { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .bubble-me { background: #005c4b; color: #e9edef; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .chat-timestamp { position: absolute; bottom: 3px; right: 10px; font-size: 9px; color: rgba(255,255,255,0.5); }
+
+        .chat-input-area { 
+            display: flex; padding: 10px; background: #202c33; gap: 8px; align-items: center;
+        }
+        .input-message-box { 
+            flex: 1; padding: 10px 14px; background: #2a3942; border: none; border-radius: 20px; color: #fff; font-size: 13.5px; outline: none; 
+        }
+        .input-message-box::placeholder { color: #8696a0; }
+        .btn-send-chat { 
+            background: #00a884; border: none; width: 38px; height: 38px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-romantic-wrapper">
+    <div class="love-rain-container" id="loveRainEngine"></div>
+    
+    <audio id="musicTrackEngine" src="" loop></audio>
+
+    <div id="page-romance-1" class="romance-page-layer halaman-aktif">
+        <div class="flower-glow-header">
+            <div class="lamp-glow-effect" style="top:50%; left:50%; transform:translate(-50%, -50%); width:160px; height:160px;"></div>
+            🌸
+        </div>
+        <div class="couple-images-row">
+            <div class="photo-elastic-item">
+                <div class="lamp-glow-effect" style="top:50%; left:50%; transform:translate(-50%, -50%);"></div>
+                <img id="linkFotoHalaman1Boy" src="" alt="Foto Cowok Halaman 1">
+            </div>
+            <div class="photo-elastic-item">
+                <div class="lamp-glow-effect" style="top:50%; left:50%; transform:translate(-50%, -50%);"></div>
+                <img id="linkFotoHalaman1Girl" src="" alt="Foto Cewek Halaman 1">
+            </div>
+        </div>
+        <button class="btn-main-open" onclick="navigasiKeHalaman(2)">Open</button>
+    </div>
+
+    <div id="page-romance-2" class="romance-page-layer">
+        <div class="apple-music-mini-card">
+            <div class="apple-cover-art">
+                <img id="linkFotoAppleMusic" src="" alt="Cover Musik Apple">
+            </div>
+            <div>
+                <div class="apple-track-name">Kisah Sempurna</div>
+                <div class="apple-track-artist">Spesial Untukmu</div>
+            </div>
+            <div class="apple-progress-timeline" onclick="aturGarisWaktuLagu(event)">
+                <div class="apple-progress-bar-fill" id="progressBarStatus"></div>
+            </div>
+            <div class="apple-timestamps">
+                <span id="timeCurrent">0:00</span><span id="timeTotal">0:00</span>
+            </div>
+            <div class="apple-controls-layout">
+                <button class="apple-icon-btn" onclick="toggleMuteAudioTrack()" id="btnTrackMute"><i class="fa-solid fa-volume-high"></i></button>
+                <button class="apple-icon-btn master-play-pause" onclick="togglePlayAudioTrack()" id="btnTrackPlay"><i class="fa-solid fa-circle-pause"></i></button>
+                <button class="apple-icon-btn" style="opacity: 0.2; cursor: default;"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(1)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(3)">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="page-romance-3" class="romance-page-layer">
+        <div class="romantic-letter-paper">
+            <h2>Hai Kamu...</h2>
+            <p>Lewat tulisan kecil ini, aku hanya ingin menyampaikan rasa syukur yang amat besar karena kamu telah hadir di hidupku. Terima kasih telah menjadi orang yang penuh kesabaran, pendengar yang baik, serta sumber tawa paling tulus di setiap hariku. Tetap bersamaku ya! ❤️</p>
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(2)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(4)">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="page-romance-4" class="romance-page-layer">
+        <div class="gallery-elastic-container">
+            <img id="linkFotoHalaman4Portrait" class="frame-portrait-elastic" src="" alt="Portrait Frame">
+            <img id="linkFotoHalaman4Landscape" class="frame-landscape-elastic" src="" alt="Landscape Frame">
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(3)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(5)">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="page-romance-5" class="romance-page-layer">
+        <div class="unlocked-chat-container">
+            <div class="chat-messages-log" id="chatMessagesLog"></div>
+            
+            <div class="chat-input-area">
+                <input type="text" id="chatInputField" class="input-message-box" placeholder="Ketik pesan..." onkeypress="cekTombolEnterChat(event)">
+                <button class="btn-send-chat" onclick="eksekusiKirimPesan()"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(4)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(6)">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="page-romance-6" class="romance-page-layer">
+        <div style="text-align: center; max-width: 280px;">
+            <h1 style="font-family: 'Great Vibes', cursive; font-size: 42px; color: #ff85a1; margin-bottom: 12px;">Selamanya... ✨</h1>
+            <p style="font-size: 13.5px; line-height: 1.6; color: #dfdfdf; font-weight: 300;">Setiap detik bersamamu adalah momen terbaik dalam hidupku. Bahagia selalu ya kita!</p>
+        </div>
+        <div class="nav-buttons-spacer">
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(5)"><i class="fa-solid fa-chevron-left"></i> Back</button>
+            <button class="btn-romance-nav" onclick="navigasiKeHalaman(1)"><i class="fa-solid fa-rotate-left"></i> Ulangi</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // SEKSI MODIFIKASI LINK (GANTI DI SINI AGAR TIDAK PUSING)
+    // ==========================================
+    
+    // 1. Link Musik Backsound (.mp3)
+    var LINK_MUSIK_UTAMA = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+    
+    // 2. Link Foto Halaman 1 (Dua foto berdampingan)
+    var FOTO_HAL_1_COWOK = "https://picsum.photos/300/400?random=11";
+    var FOTO_HAL_1_CEWEK = "https://picsum.photos/300/400?random=12";
+    
+    // 3. Link Foto Cover di Box Apple Music Halaman 2
+    var FOTO_COVER_APPLE_MUSIC = "https://picsum.photos/300/300?random=55";
+    
+    // 4. Link Foto Galeri Halaman 4 (Portrait & Landscape)
+    var FOTO_HAL_4_PORTRAIT  = "https://picsum.photos/300/400?random=21";
+    var FOTO_HAL_4_LANDSCAPE = "https://picsum.photos/400/250?random=22";
+
+    // ==========================================
+    // PROSES SETUP LINK OTOMATIS KE HTML
+    // ==========================================
+    document.getElementById('musicTrackEngine').src = LINK_MUSIK_UTAMA;
+    document.getElementById('linkFotoHalaman1Boy').src = FOTO_HAL_1_COWOK;
+    document.getElementById('linkFotoHalaman1Girl').src = FOTO_HAL_1_CEWEK;
+    document.getElementById('linkFotoAppleMusic').src = FOTO_COVER_APPLE_MUSIC;
+    document.getElementById('linkFotoHalaman4Portrait').src = FOTO_HAL_4_PORTRAIT;
+    document.getElementById('linkFotoHalaman4Landscape').src = FOTO_HAL_4_LANDSCAPE;
+
+    // ==========================================
+    // LOGIC UTAMA SISTEM WEBSITE
+    // ==========================================
+    var audioEngine = document.getElementById('musicTrackEngine');
+    var trackPlayBtn = document.getElementById('btnTrackPlay');
+    var trackMuteBtn = document.getElementById('btnTrackMute');
+    var statusFillBar = document.getElementById('progressBarStatus');
+    var txtCurrentTime = document.getElementById('timeCurrent');
+    var txtTotalTime = document.getElementById('timeTotal');
+
+    function navigasiKeHalaman(idx) {
+        document.querySelectorAll('.romance-page-layer').forEach(function(slide) {
+            slide.style.setProperty('visibility', 'hidden', 'important');
+            slide.style.setProperty('z-index', '-10', 'important');
+            slide.style.setProperty('opacity', '0', 'important');
+            slide.classList.remove('halaman-aktif');
+        });
+        var target = document.getElementById('page-romance-' + idx);
+        if(target) {
+            target.style.setProperty('visibility', 'visible', 'important');
+            target.style.setProperty('z-index', '50', 'important');
+            setTimeout(function(){ target.style.setProperty('opacity', '1', 'important'); target.classList.add('halaman-aktif'); }, 30);
+        }
+        if (idx === 2 && audioEngine.paused) {
+            audioEngine.play().catch(function() { console.log("Audio play started."); });
+            trackPlayBtn.innerHTML = '<i class="fa-solid fa-circle-pause"></i>';
+        }
+    }
+
+    // Engine Hujan Love 💗 (Diperjarang & Diperlambat Maksimal)
+    function generateLoveRain() {
+        var field = document.getElementById('loveRainEngine');
+        if (!field || field.childElementCount > 5) return; // Jumlah di layar dibatasi agar bersih
+
+        var loveNode = document.createElement('div');
+        loveNode.classList.add('blur-love-item');
+        loveNode.innerHTML = '💗';
+        loveNode.style.left = (Math.random() * 92) + 'vw';
+        loveNode.style.animationDuration = (Math.random() * 4 + 16) + 's'; // 16-20 detik melayang pelan sekali
+        loveNode.style.fontSize = (Math.random() * 5 + 16) + 'px';
+        
+        field.appendChild(loveNode);
+        setTimeout(function() { loveNode.remove(); }, 17500);
+    }
+    setInterval(generateLoveRain, 2000); // Muncul setiap 2 detik sekali agar tidak menumpuk cepat
+
+    // ENGINE SISTEM CHAT WHATSAPP WORK REAL TIME
+    function eksekusiKirimPesan() {
+        var inputNode = document.getElementById('chatInputField');
+        var logWadah = document.getElementById('chatMessagesLog');
+        var teksPesan = inputNode.value.trim();
+        
+        if (teksPesan === "") return;
+
+        // Bikin struktur bubble baru
+        var bubble = document.createElement('div');
+        bubble.className = 'chat-bubble-row bubble-me';
+        
+        // Atur waktu jam pesan dikirim
+        var d = new Date();
+        var jamMenit = d.getHours().toString().padStart(2, '0') + ':' + d.getMinutes().toString().padStart(2, '0');
+        
+        bubble.innerHTML = teksPesan + '<span class="chat-timestamp">' + jamMenit + '</span>';
+        
+        logWadah.appendChild(bubble);
+        inputNode.value = ""; // Bersihkan kolom ketik setelah kirim
+        
+        // Auto gulir ke pesan paling bawah demi kenyamanan WA
+        logWadah.scrollTop = logWadah.scrollHeight;
+    }
+
+    function cekTombolEnterChat(e) {
+        if (e.key === "Enter") { eksekusiKirimPesan(); }
+    }
+
+    // PLAYER CONTROLS APPLE MUSIC
+    function togglePlayAudioTrack() {
+        if (audioEngine.paused) { audioEngine.play(); trackPlayBtn.innerHTML = '<i class="fa-solid fa-circle-pause"></i>'; }
+        else { audioEngine.pause(); trackPlayBtn.innerHTML = '<i class="fa-solid fa-circle-play"></i>'; }
+    }
+    function toggleMuteAudioTrack() {
+        audioEngine.muted = !audioEngine.muted;
+        trackMuteBtn.innerHTML = audioEngine.muted ? '<i class="fa-solid fa-volume-xmark"></i>' : '<i class="fa-solid fa-volume-high"></i>';
+    }
+    if(audioEngine) {
+        audioEngine.addEventListener('timeupdate', function() {
+            var current = audioEngine.currentTime, duration = audioEngine.duration || 0;
+            if(statusFillBar) statusFillBar.style.width = ((current / duration) * 100) + '%';
+            var fmt = function(s) { return Math.floor(s / 60) + ':' + Math.floor(s % 60).toString().padStart(2, '0'); };
+            if(txtCurrentTime) txtCurrentTime.innerHTML = fmt(current);
+            if(txtTotalTime) txtTotalTime.innerHTML = fmt(duration);
+        });
+    }
+    function aturGarisWaktuLagu(e) {
+        var bounds = e.currentTarget.getBoundingClientRect();
+        audioEngine.currentTime = ((e.clientX - bounds.left) / bounds.width) * audioEngine.duration;
+    }
+</script>
+
+</body>
+</html>
